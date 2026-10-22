@@ -25,6 +25,23 @@ jobs:
       - name: Build Docker image
         run: docker build -t sanjanaa12/nodejs-demo-app:latest .
 
+      - name: Check Docker Hub token is available
+        env:
+          HUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          if [ -z "$HUB_TOKEN" ]; then
+            echo "ERROR: Docker Hub token is empty or unavailable."
+            exit 1
+          else
+            echo "Docker Hub token is present."
+          fi
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
