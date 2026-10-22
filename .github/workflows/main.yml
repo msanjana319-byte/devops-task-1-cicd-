@@ -23,7 +23,7 @@ jobs:
         run: npm test
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-demo-app:latest .
+        run: docker build -t sanjanaa12/nodejs-demo-app:latest .
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
